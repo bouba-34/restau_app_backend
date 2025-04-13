@@ -4,7 +4,7 @@ using backend.Api.Models.DTOs.Auth;
 using backend.Api.Models.Responses;
 using backend.Api.Services.Interfaces;
 
-namespace RestaurantManagement.Api.Controllers
+namespace backend.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -4,7 +4,7 @@ using backend.Api.Data.Repositories.Interfaces;
 using backend.Api.Hubs;
 using backend.Api.Models.DTOs.Order;
 using backend.Api.Models.Entities;
-using backend.Api.Repositories.Interfaces;
+using backend.Api.Data.Repositories.Interfaces;
 using backend.Api.Services.Interfaces;
 
 namespace backend.Api.Services.Implementations

@@ -13,7 +13,7 @@ namespace backend.Api.Models.DTOs.Menu
 
         public int DisplayOrder { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
         public bool IsActive { get; set; } = true;
     }

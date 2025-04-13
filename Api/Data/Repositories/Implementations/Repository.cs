@@ -89,27 +89,27 @@ namespace backend.Api.Data.Repositories.Implementations
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(T entity)
+        public async Task<bool> UpdateAsync(T entity)
         {
             _dbSet.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task RemoveAsync(string id)
+        public async Task<bool> RemoveAsync(string id)
         {
             T entity = await _dbSet.FindAsync(id);
-            await RemoveAsync(entity);
+            return await RemoveAsync(entity);
         }
 
-        public async Task RemoveAsync(T entity)
+        public async Task<bool> RemoveAsync(T entity)
         {
             if (_context.Entry(entity).State == EntityState.Detached)
             {
                 _dbSet.Attach(entity);
             }
             _dbSet.Remove(entity);
-            await _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<int> CountAsync(Expression<Func<T, bool>> filter = null)

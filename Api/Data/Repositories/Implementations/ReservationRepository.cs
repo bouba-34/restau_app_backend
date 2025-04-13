@@ -84,14 +84,14 @@ namespace backend.Api.Data.Repositories.Implementations
             return !conflictingReservations;
         }
 
-        public override async Task<Reservation> GetByIdAsync(string id)
+        public async Task<Reservation> GetByIdAsync(string id)
         {
             return await _context.Reservations
                 .Include(r => r.Customer)
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public override async Task<IEnumerable<Reservation>> GetAllAsync()
+        public async Task<IEnumerable<Reservation>> GetAllAsync()
         {
             return await _context.Reservations
                 .Include(r => r.Customer)

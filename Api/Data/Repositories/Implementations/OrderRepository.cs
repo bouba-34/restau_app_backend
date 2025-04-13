@@ -44,7 +44,7 @@ namespace backend.Api.Data.Repositories.Implementations
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public override async Task<Order> GetByIdAsync(string id)
+        public async Task<Order> GetByIdAsync(string id)
         {
             return await _context.Orders
                 .Include(o => o.Customer)
@@ -55,7 +55,7 @@ namespace backend.Api.Data.Repositories.Implementations
                 .FirstOrDefaultAsync(o => o.Id == id);
         }
 
-        public override async Task<IEnumerable<Order>> GetAllAsync()
+        public async Task<IEnumerable<Order>> GetAllAsync()
         {
             return await _context.Orders
                 .Include(o => o.Customer)

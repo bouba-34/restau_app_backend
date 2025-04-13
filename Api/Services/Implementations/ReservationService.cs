@@ -6,7 +6,7 @@ using backend.Api.Models.DTOs.Reservation;
 using backend.Api.Models.Entities;
 using backend.Api.Services.Interfaces;
 
-namespace RestaurantManagement.Api.Services.Implementations
+namespace backend.Api.Services.Implementations
 {
     public class ReservationService : IReservationService
     {

@@ -97,7 +97,7 @@ namespace backend.Api.Data.Repositories.Implementations
         }
 
         // Override the base class method to include category
-        public override async Task<MenuItem> GetByIdAsync(string id)
+        public async Task<MenuItem> GetByIdAsync(string id)
         {
             return await _context.MenuItems
                 .Include(m => m.Category)
@@ -105,7 +105,7 @@ namespace backend.Api.Data.Repositories.Implementations
         }
 
         // Override to add additional filters or includes as needed
-        public override async Task<IEnumerable<MenuItem>> GetAsync(
+        public async Task<IEnumerable<MenuItem>> GetAsync(
             Expression<Func<MenuItem, bool>> filter = null,
             Func<IQueryable<MenuItem>, IOrderedQueryable<MenuItem>> orderBy = null,
             string includeProperties = "",

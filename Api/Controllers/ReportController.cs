@@ -85,4 +85,34 @@ namespace backend.Api.Controllers
             return Ok(ApiResponse<object>.SuccessResponse(summary));
         }
     }
+    
+    public class SalesReport
+    {
+        public DateTime Date { get; set; }
+        public decimal TotalSales { get; set; }
+        public int TotalOrders { get; set; }
+        public decimal AverageOrderValue { get; set; }
+        public Dictionary<string, decimal> SalesByCategory { get; set; } = new Dictionary<string, decimal>();
+        public List<MenuItemSales> TopSellingItems { get; set; } = new List<MenuItemSales>();
+        public Dictionary<int, int> OrdersByHour { get; set; } = new Dictionary<int, int>();
+        public Dictionary<PaymentMethod, decimal> SalesByPaymentMethod { get; set; } = new Dictionary<PaymentMethod, decimal>();
+    }
+
+    public class MenuItemSales
+    {
+        public string MenuItemId { get; set; }
+        public string MenuItemName { get; set; }
+        public int QuantitySold { get; set; }
+        public decimal TotalSales { get; set; }
+    }
+    
+    public enum PaymentMethod
+    {
+        Cash,
+        CreditCard,
+        DebitCard,
+        MobilePayment,
+        GiftCard,
+        OnlinePayment
+    }
 }

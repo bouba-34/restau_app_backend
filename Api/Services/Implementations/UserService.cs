@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
-using RestaurantManagement.Api.Controllers;
+using backend.Api.Controllers;
 using backend.Api.Data.Repositories.Interfaces;
 using backend.Api.Models.Entities;
 using backend.Api.Services.Interfaces;
 using System.Security.Cryptography;
 using System.Text;
-using backend.Api.Controllers;
-using backend.Api.Repositories.Interfaces;
 
 namespace backend.Api.Services.Implementations
 {

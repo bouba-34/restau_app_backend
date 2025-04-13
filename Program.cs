@@ -8,6 +8,7 @@ using backend.Api.Extensions;
 using backend.Api.Hubs;
 using backend.Api.Middlewares;
 using System.Text;
+using backend.Api.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,6 +70,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Configure JWT Authentication
 var jwtConfig = builder.Configuration.GetSection("JwtConfig").Get<JwtConfig>();
 builder.Services.AddSingleton(jwtConfig);
+var cloudStorageConfig = builder.Configuration.GetSection("CloudStorageConfig").Get<CloudStorageConfig>();
+builder.Services.AddSingleton(cloudStorageConfig);
+
+// Register ImageHelper
+builder.Services.AddScoped<ImageHelper>();
 
 builder.Services.AddAuthentication(options =>
 {

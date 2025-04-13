@@ -1,4 +1,5 @@
-﻿using backend.Api.Models.Entities;
+﻿using backend.Api.Controllers;
+using backend.Api.Models.Entities;
 
 namespace backend.Api.Services.Interfaces
 {

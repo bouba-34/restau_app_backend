@@ -155,6 +155,7 @@ namespace backend.Api.Data
 
         private void SeedData(ModelBuilder modelBuilder)
         {
+            var createdAt = new DateTime(2024, 01, 01, 0, 0, 0, DateTimeKind.Utc);
             // Add admin user
             modelBuilder.Entity<User>().HasData(
                 new User
@@ -166,8 +167,8 @@ namespace backend.Api.Data
                     // This is a hashed version of "Admin@123" - in reality, you would hash this properly
                     PasswordHash = "AQAAAAEAACcQAAAAEGa5MFgm5Rj0YJQ7zt7yYrlvY0rJi9YHdI5FhXVjuq5mPx3XXVnFEcUUJ3K0JQXmwQ==",
                     UserType = UserType.Admin,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow,
+                    CreatedAt = createdAt,
+                    UpdatedAt = createdAt,
                     IsActive = true
                 }
             );
@@ -187,8 +188,8 @@ namespace backend.Api.Data
                     DisplayOrder = 1,
                     ImageUrl = "/images/categories/appetizers.jpg",
                     IsActive = true,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
+                    CreatedAt = createdAt,
+                    UpdatedAt = createdAt
                 },
                 new MenuCategory
                 {
@@ -198,8 +199,8 @@ namespace backend.Api.Data
                     DisplayOrder = 2,
                     ImageUrl = "/images/categories/main-courses.jpg",
                     IsActive = true,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
+                    CreatedAt = createdAt,
+                    UpdatedAt = createdAt
                 },
                 new MenuCategory
                 {
@@ -209,8 +210,8 @@ namespace backend.Api.Data
                     DisplayOrder = 3,
                     ImageUrl = "/images/categories/desserts.jpg",
                     IsActive = true,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
+                    CreatedAt = createdAt,
+                    UpdatedAt = createdAt
                 },
                 new MenuCategory
                 {
@@ -220,8 +221,8 @@ namespace backend.Api.Data
                     DisplayOrder = 4,
                     ImageUrl = "/images/categories/beverages.jpg",
                     IsActive = true,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
+                    CreatedAt = createdAt,
+                    UpdatedAt = createdAt
                 }
             );
             
@@ -244,8 +245,8 @@ namespace backend.Api.Data
                     DiscountPercentage = 0,
                     IsFeatured = true,
                     DisplayOrder = 1,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
+                    CreatedAt = createdAt,
+                    UpdatedAt = createdAt
                 },
                 new MenuItem
                 {
@@ -264,8 +265,8 @@ namespace backend.Api.Data
                     DiscountPercentage = 0,
                     IsFeatured = true,
                     DisplayOrder = 1,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
+                    CreatedAt = createdAt,
+                    UpdatedAt = createdAt
                 },
                 new MenuItem
                 {
@@ -284,8 +285,8 @@ namespace backend.Api.Data
                     DiscountPercentage = 0,
                     IsFeatured = false,
                     DisplayOrder = 1,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
+                    CreatedAt = createdAt,
+                    UpdatedAt = createdAt
                 },
                 new MenuItem
                 {
@@ -304,8 +305,8 @@ namespace backend.Api.Data
                     DiscountPercentage = 0,
                     IsFeatured = true,
                     DisplayOrder = 1,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow
+                    CreatedAt = createdAt,
+                    UpdatedAt = createdAt
                 }
             );
             

@@ -21,11 +21,11 @@ namespace backend.Api.Data.Repositories.Interfaces
             
         Task AddAsync(T entity);
         
-        Task UpdateAsync(T entity);
+        Task<bool> UpdateAsync(T entity);
         
-        Task RemoveAsync(string id);
+        Task<bool> RemoveAsync(string id);
         
-        Task RemoveAsync(T entity);
+        Task<bool> RemoveAsync(T entity);
         
         Task<int> CountAsync(Expression<Func<T, bool>> filter = null);
     }

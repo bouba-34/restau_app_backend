@@ -3,6 +3,7 @@ using backend.Api.Models.Entities;
 using backend.Api.Services.Interfaces;
 using System.Text;
 using System.Text.Json;
+using backend.Api.Controllers;
 
 namespace backend.Api.Services.Implementations
 {

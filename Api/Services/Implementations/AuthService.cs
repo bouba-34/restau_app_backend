@@ -7,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using backend.Api.Repositories.Interfaces;
+using backend.Api.Data.Repositories.Interfaces;
 
 namespace backend.Api.Services.Implementations
 {

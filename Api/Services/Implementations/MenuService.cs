@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using backend.Api.Data.Repositories.Interfaces;
-using RestaurantManagement.Api.Hubs;
+using backend.Api.Helpers;
+using backend.Api.Hubs;
 using backend.Api.Models.DTOs.Menu;
 using backend.Api.Models.Entities;
 using backend.Api.Services.Interfaces;
@@ -13,16 +14,21 @@ namespace backend.Api.Services.Implementations
         private readonly IMenuRepository _menuRepository;
         private readonly IMapper _mapper;
         private readonly IHubContext<RestaurantHub> _hubContext;
+        private readonly ImageHelper _imageHelper;
+
 
         public MenuService(
             IMenuRepository menuRepository,
             IMapper mapper,
-            IHubContext<RestaurantHub> hubContext)
+            IHubContext<RestaurantHub> hubContext,
+            ImageHelper imageHelper)
         {
             _menuRepository = menuRepository;
             _mapper = mapper;
             _hubContext = hubContext;
+            _imageHelper = imageHelper;
         }
+
 
         public async Task<List<MenuCategoryDto>> GetAllCategoriesAsync()
         {
@@ -62,6 +68,17 @@ namespace backend.Api.Services.Implementations
 
         public async Task<bool> DeleteCategoryAsync(string categoryId)
         {
+            // Get category to find image URL
+            var category = await _menuRepository.GetCategoryByIdAsync(categoryId);
+            if (category == null)
+                return false;
+
+            // Delete image if exists
+            if (!string.IsNullOrEmpty(category.ImageUrl))
+            {
+                await _imageHelper.DeleteImageAsync(category.ImageUrl);
+            }
+
             return await _menuRepository.DeleteCategoryAsync(categoryId);
         }
 
@@ -115,7 +132,18 @@ namespace backend.Api.Services.Implementations
 
         public async Task<bool> DeleteMenuItemAsync(string menuItemId)
         {
-            return await _menuRepository.RemoveAsync(menuItemId) > 0;
+            // Get menu item to find image URL
+            var menuItem = await _menuRepository.GetByIdAsync(menuItemId);
+            if (menuItem == null)
+                return false;
+
+            // Delete image if exists
+            if (!string.IsNullOrEmpty(menuItem.ImageUrl))
+            {
+                await _imageHelper.DeleteImageAsync(menuItem.ImageUrl);
+            }
+
+            return await _menuRepository.RemoveAsync(menuItemId);
         }
 
         public async Task<bool> UpdateMenuItemAvailabilityAsync(string menuItemId, MenuItemAvailabilityDto availabilityDto)

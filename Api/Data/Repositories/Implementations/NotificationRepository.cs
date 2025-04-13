@@ -56,14 +56,14 @@ namespace backend.Api.Data.Repositories.Implementations
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public override async Task<Notification> GetByIdAsync(string id)
+        public async Task<Notification> GetByIdAsync(string id)
         {
             return await _context.Notifications
                 .Include(n => n.User)
                 .FirstOrDefaultAsync(n => n.Id == id);
         }
 
-        public override async Task<IEnumerable<Notification>> GetAllAsync()
+        public async Task<IEnumerable<Notification>> GetAllAsync()
         {
             return await _context.Notifications
                 .Include(n => n.User)
