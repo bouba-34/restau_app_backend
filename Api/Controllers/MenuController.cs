@@ -43,7 +43,7 @@ namespace backend.Api.Controllers
         }
         
         [HttpPost("categories")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateCategoryWithImage([FromForm] CreateMenuCategoryDto categoryDto, IFormFile image)
         {
             if (!ModelState.IsValid)
