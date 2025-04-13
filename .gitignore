@@ -1,0 +1,62 @@
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+*.sln.iml
+
+# Visual Studio Code
+.vscode/
+
+# ASP.NET secrets
+secrets.json
+**/appsettings.Development.json
+**/appsettings.Local.json
+**/appsettings.json
+appsettings.json
+.env
+
+# Logs
+*.log
+logs/
+*.tlog
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/
+
+# Dotnet-specific
+project.lock.json
+project.fragment.lock.json
+artifacts/
+*.deps.json
+
+# Entity Framework
+Api/Data/Migrations/
+
+# Test results
+TestResults/
+*.coverage
+*.coveragexml
+*.testresults
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# Others
+.DS_Store
+Thumbs.db
+
+# Swagger generated files (optional)
+swagger/
+swagger-ui/
