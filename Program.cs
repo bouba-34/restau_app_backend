@@ -8,6 +8,7 @@ using backend.Api.Extensions;
 using backend.Api.Hubs;
 using backend.Api.Middlewares;
 using System.Text;
+using System.Text.Json.Serialization;
 using backend.Api.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,7 @@ builder.Services.AddControllers()
     {
         options.JsonSerializerOptions.PropertyNamingPolicy = null;
         options.JsonSerializerOptions.WriteIndented = true;
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

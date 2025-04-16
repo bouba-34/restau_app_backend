@@ -69,7 +69,12 @@ namespace backend.Api.Controllers
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
             if (string.IsNullOrEmpty(userId))
                 return Unauthorized(new ErrorResponse("User not authenticated"));
-                
+            
+            var utcDate = DateTime.SpecifyKind(reservationDto.ReservationDate, DateTimeKind.Utc);
+            reservationDto.ReservationDate = utcDate;
+            
+            reservationDto.SpecialRequests ??= "no request";
+            
             var reservationId = await _reservationService.CreateReservationAsync(reservationDto, userId);
             
             if (string.IsNullOrEmpty(reservationId))
@@ -147,7 +152,8 @@ namespace backend.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(new ErrorResponse("Invalid model", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()));
                 
-            var tables = await _reservationService.GetAvailableTablesAsync(checkDto.Date, checkDto.Time, checkDto.PartySize);
+            var utcDate = DateTime.SpecifyKind(checkDto.Date, DateTimeKind.Utc);
+            var tables = await _reservationService.GetAvailableTablesAsync(utcDate, checkDto.Time, checkDto.PartySize);
             return Ok(ApiResponse<List<AvailableTableDto>>.SuccessResponse(tables));
         }
 
@@ -157,7 +163,8 @@ namespace backend.Api.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(new ErrorResponse("Invalid model", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()));
                 
-            var isAvailable = await _reservationService.IsTableAvailableAsync(checkDto.TableNumber, checkDto.Date, checkDto.Time);
+            var utcDate = DateTime.SpecifyKind(checkDto.Date, DateTimeKind.Utc);
+            var isAvailable = await _reservationService.IsTableAvailableAsync(checkDto.TableNumber, utcDate, checkDto.Time);
             return Ok(ApiResponse<bool>.SuccessResponse(isAvailable));
         }
     }

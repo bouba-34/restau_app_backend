@@ -14,7 +14,7 @@ namespace backend.Api.Models.DTOs.Reservation
         [Range(1, 20)]
         public int PartySize { get; set; }
 
-        public string SpecialRequests { get; set; }
+        public string? SpecialRequests { get; set; }
 
         [Phone]
         public string ContactPhone { get; set; }

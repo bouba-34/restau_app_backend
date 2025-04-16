@@ -65,23 +65,33 @@ namespace backend.Api.Data.Repositories.Implementations
             var table = await GetTableByNumberAsync(tableNumber);
             if (table == null || !table.IsActive)
                 return false;
-            
-            // Define reservation time window (typically 2 hours)
-            var startWindow = time.Add(TimeSpan.FromHours(-1));
-            var endWindow = time.Add(TimeSpan.FromHours(1));
-            
-            // Check if there are any overlapping reservations
-            var conflictingReservations = await _context.Reservations
+
+            var reservationDuration = TimeSpan.FromMinutes(90);
+            var requestedStart = time;
+            var requestedEnd = time + reservationDuration;
+
+            // On récupère toutes les réservations concernées côté base
+            var reservations = await _context.Reservations
                 .Where(r => r.TableNumber == tableNumber &&
-                           r.ReservationDate.Date == date.Date &&
-                           r.Status != ReservationStatus.Cancelled &&
-                           r.Status != ReservationStatus.NoShow &&
-                           ((r.ReservationTime >= startWindow && r.ReservationTime <= endWindow) ||
-                            (r.ReservationTime.Add(TimeSpan.FromHours(1.5)) >= startWindow && 
-                             r.ReservationTime.Add(TimeSpan.FromHours(1.5)) <= endWindow)))
-                .AnyAsync();
-                
-            return !conflictingReservations;
+                            r.ReservationDate.Date == date.Date &&
+                            r.Status != ReservationStatus.Cancelled &&
+                            r.Status != ReservationStatus.NoShow)
+                .ToListAsync(); // passage en mémoire ici
+
+            // Vérifie le chevauchement en mémoire
+            foreach (var reservation in reservations)
+            {
+                var existingStart = reservation.ReservationTime;
+                var existingEnd = existingStart + reservationDuration;
+
+                // Chevauchement ?
+                if (existingStart < requestedEnd && existingEnd > requestedStart)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public async Task<Reservation> GetByIdAsync(string id)
