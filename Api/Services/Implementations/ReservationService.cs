@@ -61,7 +61,7 @@ namespace backend.Api.Services.Implementations
 
         public async Task<List<ReservationDto>> GetUpcomingReservationsAsync()
         {
-            var now = DateTime.Now;
+            var now = DateTime.UtcNow;
             var today = now.Date;
             var currentTime = now.TimeOfDay;
 

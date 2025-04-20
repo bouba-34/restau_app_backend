@@ -156,25 +156,23 @@ namespace backend.Api.Services.Implementations
 
         public async Task<object> GetDashboardSummaryAsync()
         {
-            var today = DateTime.Today;
+            var today = DateTime.UtcNow.Date;
             var yesterday = today.AddDays(-1);
             var thisWeekStart = today.AddDays(-(int)today.DayOfWeek);
             var lastWeekStart = thisWeekStart.AddDays(-7);
-            var thisMonthStart = new DateTime(today.Year, today.Month, 1);
-            
+            var thisMonthStart = new DateTime(today.Year, today.Month, 1, 0, 0, 0, DateTimeKind.Utc); // Ajout du Kind
+
             var todayReport = await GetDailySalesReportAsync(today);
             var yesterdayReport = await GetDailySalesReportAsync(yesterday);
             var thisWeekReport = await GenerateReportForDateRange(thisWeekStart, today);
             var lastWeekReport = await GenerateReportForDateRange(lastWeekStart, thisWeekStart.AddDays(-1));
             var thisMonthReport = await GenerateReportForDateRange(thisMonthStart, today);
-            
-            // Get pending orders count
+
             var pendingOrders = await _orderRepository.CountAsync(o => 
                 o.Status != OrderStatus.Completed && o.Status != OrderStatus.Cancelled);
-                
-            // Get top selling items this week
+
             var topItems = await GetTopSellingItemsAsync(thisWeekStart, today, 5);
-            
+
             return new
             {
                 Today = new
@@ -213,6 +211,7 @@ namespace backend.Api.Services.Implementations
                 OrdersByHour = todayReport.OrdersByHour
             };
         }
+
 
         private async Task<SalesReport> GenerateReportForDateRange(DateTime startDate, DateTime endDate)
         {

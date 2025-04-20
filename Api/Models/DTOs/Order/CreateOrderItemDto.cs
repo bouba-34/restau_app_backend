@@ -13,6 +13,6 @@ namespace backend.Api.Models.DTOs.Order
 
         public List<string> Customizations { get; set; } = new List<string>();
 
-        public string SpecialInstructions { get; set; }
+        public string SpecialInstructions { get; set; } = "None";
     }
 }

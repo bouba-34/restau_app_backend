@@ -13,7 +13,7 @@ namespace backend.Api.Models.DTOs.Order
 
         public string TableNumber { get; set; }
 
-        public string SpecialInstructions { get; set; }
+        public string SpecialInstructions { get; set; } = "None";
 
         public string PaymentMethod { get; set; }
 

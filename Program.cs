@@ -74,6 +74,7 @@ var jwtConfig = builder.Configuration.GetSection("JwtConfig").Get<JwtConfig>();
 builder.Services.AddSingleton(jwtConfig);
 var cloudStorageConfig = builder.Configuration.GetSection("CloudStorageConfig").Get<CloudStorageConfig>();
 builder.Services.AddSingleton(cloudStorageConfig);
+builder.WebHost.UseUrls("http://0.0.0.0:5238");
 
 // Register ImageHelper
 builder.Services.AddScoped<ImageHelper>();

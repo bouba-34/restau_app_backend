@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using backend.Api.Controllers;
 using backend.Api.Models.DTOs.Auth;
 using backend.Api.Models.DTOs.Menu;
 using backend.Api.Models.DTOs.Order;
@@ -13,6 +14,8 @@ namespace backend.Api.Configuration
         {
             // User mappings
             CreateMap<User, RegisterRequest>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
+
             
             // Menu mappings
             CreateMap<MenuCategory, MenuCategoryDto>().ReverseMap();
