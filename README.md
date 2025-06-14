@@ -250,5 +250,5 @@ For questions, support, or contributions, please contact:
 
 - **Name**: Boubacar Sangare
 - **Email**: boubacar34sangare@gmail.com
-- **LinkedIn**: [Your LinkedIn Profile](https://www.linkedin.com/in/boubacar-sangare-7725831b9/)
-- **GitHub**: [Your GitHub Profile](https://github.com/bouba-34)
+- **LinkedIn**: [Bouba](https://www.linkedin.com/in/boubacar-sangare-7725831b9/)
+- **GitHub**: Bouba](https://github.com/bouba-34)
